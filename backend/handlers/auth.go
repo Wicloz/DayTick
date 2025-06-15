@@ -45,6 +45,17 @@ func Register(c *fiber.Ctx) error {
 		return utils.APIerror(c, fiber.StatusConflict, "invalid email")
 	}
 
+	session, err := middleware.CreateSession(user.ID)
+	if err != nil {
+		return utils.APIerror(c, fiber.StatusInternalServerError, "failed to create auth session")
+	}
+
+	c.Cookie(&fiber.Cookie{
+		Name:    "session_token",
+		Value:   session.Token.String(),
+		Expires: session.Expires,
+	})
+
 	return utils.APIok(c, fiber.StatusCreated)
 }
 
