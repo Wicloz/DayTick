@@ -9,7 +9,7 @@ import (
 type User struct {
 	ID           uint   `gorm:"primaryKey" json:"id"`
 	Email        string `gorm:"unique;not null" json:"email"`
-	PasswordHash string `gorm:"not null" json:"-"`
+	PasswordHash []byte `gorm:"not null" json:"-"`
 
 	StartOfWeek  string `gorm:"default:'monday'" json:"start_of_week"`
 	RolloverTime string `gorm:"default:'00:00'" json:"rollover_time"`

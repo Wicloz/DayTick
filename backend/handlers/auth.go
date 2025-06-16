@@ -38,7 +38,7 @@ func Register(c *fiber.Ctx) error {
 
 	user := database.User{
 		Email:        strings.ToLower(body.Email),
-		PasswordHash: string(hash),
+		PasswordHash: hash,
 	}
 
 	if err := database.DB.Create(&user).Error; err != nil {
@@ -73,7 +73,7 @@ func Login(c *fiber.Ctx) error {
 		return utils.APIerror(c, fiber.StatusUnauthorized, "invalid email or password")
 	}
 
-	if err := bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(body.Password)); err != nil {
+	if err := bcrypt.CompareHashAndPassword(user.PasswordHash, []byte(body.Password)); err != nil {
 		return utils.APIerror(c, fiber.StatusUnauthorized, "invalid email or password")
 	}
 
