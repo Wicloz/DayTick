@@ -8,7 +8,7 @@ import (
 
 type User struct {
 	ID           uint   `gorm:"primaryKey" json:"id"`
-	Email        string `gorm:"unique;not null" json:"email"`
+	Email        string `gorm:"uniqueIndex;not null" json:"email"`
 	PasswordHash []byte `gorm:"not null" json:"-"`
 
 	StartOfWeek  string `gorm:"default:'monday'" json:"start_of_week"`
@@ -19,14 +19,14 @@ type Task struct {
 	ID        uint      `gorm:"primaryKey" json:"id"`
 	UserID    uint      `gorm:"index;not null" json:"-"`
 	Title     string    `gorm:"not null" json:"title"`
-	PlannedAt string    `gorm:"size:10;not null" json:"planned_at"`
+	PlannedAt string    `gorm:"index;size:10;not null" json:"planned_at"`
 	CreatedAt time.Time `gorm:"not null" json:"created_at"`
-	Completed bool      `gorm:"default:false" json:"completed"`
+	Completed bool      `gorm:"index;default:false" json:"completed"`
 }
 
 type AuthToken struct {
 	ID      uint      `gorm:"primaryKey" json:"id"`
-	UserID  uint      `gorm:"index;not null" json:"-"`
-	Token   uuid.UUID `gorm:"not null" json:"token"`
-	Expires time.Time `gorm:"not null" json:"expires"`
+	UserID  uint      `gorm:"not null" json:"-"`
+	Token   uuid.UUID `gorm:"uniqueIndex;not null" json:"token"`
+	Expires time.Time `gorm:"index;not null" json:"expires"`
 }
