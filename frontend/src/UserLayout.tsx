@@ -31,7 +31,7 @@ export default function UserLayout() {
     }
 
     return (
-        <div className="container">
+        <>
             <Outlet />
 
             <div className="fixed-action-btn" id="corner-menu-button">
@@ -39,13 +39,13 @@ export default function UserLayout() {
                     <i className="large material-icons">menu</i>
                 </a>
                 <ul>
-                    <li><a className={`btn-floating red ${loggingOut ? "disabled" : ""}`} onClick={logout}><i className="material-icons">logout</i></a></li>
+                    <li><a className={`btn-floating red ${loggingOut ? "pulse" : ""}`} onClick={logout}><i className="material-icons">logout</i></a></li>
                     <li><Link to="/" className="btn-floating blue"><i className="material-icons">settings</i></Link></li>
                     <li><Link to="/" className="btn-floating blue"><i className="material-icons">calendar_month</i></Link></li>
                     <li><Link to="/" className="btn-floating green"><i className="material-icons">add</i></Link></li>
                     <li><Link to="/" className="btn-floating blue"><i className="material-icons">list</i></Link></li>
                 </ul>
             </div>
-        </div>
+        </>
     )
 }
