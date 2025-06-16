@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import UserLayout from './UserLayout'
 import Calendar from './pages/Calendar'
+import Task from './pages/Task'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById('root')!).render(
 
         <Route element={<UserLayout />}>
           <Route index element={<Calendar />} />
+          <Route path='/tasks/:id' element={<Task />} />
         </Route>
       </Routes>
     </BrowserRouter>
