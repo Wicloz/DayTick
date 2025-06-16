@@ -48,7 +48,7 @@ export default function Login() {
                                     required
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email" className={email ? "active" : ""}>Email</label>
                             </div>
                         </div>
 
@@ -61,7 +61,7 @@ export default function Login() {
                                     required
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
-                                <label htmlFor="password">Password</label>
+                                <label htmlFor="password" className={password ? "active" : ""}>Password</label>
                             </div>
                         </div>
 

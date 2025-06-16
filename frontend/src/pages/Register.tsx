@@ -54,7 +54,7 @@ export default function Register() {
                                     required
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email" className={email ? "active" : ""}>Email</label>
                             </div>
                         </div>
 
@@ -67,7 +67,7 @@ export default function Register() {
                                     required
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
-                                <label htmlFor="password">Password</label>
+                                <label htmlFor="password" className={password ? "active" : ""}>Password</label>
                             </div>
 
                             <div className="input-field col s12 m6">
@@ -78,7 +78,7 @@ export default function Register() {
                                     required
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                 />
-                                <label htmlFor="confirmPassword">Confirm Password</label>
+                                <label htmlFor="confirmPassword" className={confirmPassword ? "active" : ""}>Confirm Password</label>
                             </div>
                         </div>
 

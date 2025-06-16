@@ -1,7 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router'
-import 'materialize-css/dist/js/materialize.min.js'
 import './main.scss'
 import Login from './pages/Login'
 import Register from './pages/Register'
