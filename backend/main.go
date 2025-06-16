@@ -1,8 +1,8 @@
 package main
 
 import (
-	"test/database"
-	"test/server"
+	"github.com/wicloz/daytick/database"
+	"github.com/wicloz/daytick/server"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"

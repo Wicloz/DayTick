@@ -1,7 +1,7 @@
 package server
 
 import (
-	"test/handlers"
+	"github.com/wicloz/daytick/handlers"
 
 	"github.com/gofiber/fiber/v2"
 )

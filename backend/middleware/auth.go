@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"test/database"
-	"test/utils"
+	"github.com/wicloz/daytick/database"
+	"github.com/wicloz/daytick/utils"
 
 	"time"
 

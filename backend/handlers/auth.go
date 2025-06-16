@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"test/database"
-	"test/middleware"
-	"test/utils"
+	"github.com/wicloz/daytick/database"
+	"github.com/wicloz/daytick/middleware"
+	"github.com/wicloz/daytick/utils"
 
 	"net/mail"
 	"strings"
