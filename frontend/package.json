@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "material-design-icons-iconfont": "^6.7.0",
     "materialize-css": "^1.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
