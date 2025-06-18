@@ -7,7 +7,9 @@ export default function UserLayout() {
 
     useEffect(() => {
         import('materialize-css').then((M) => {
-            M.FloatingActionButton.init(document.querySelectorAll('#corner-menu-button'))
+            M.FloatingActionButton.init(document.querySelectorAll('#corner-menu-button'), {
+                hoverEnabled: false,
+            })
         })
     })
 
