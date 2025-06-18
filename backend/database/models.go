@@ -20,7 +20,7 @@ type Task struct {
 	UserID    uint      `gorm:"index;not null" json:"-"`
 	Title     string    `gorm:"not null" json:"title"`
 	PlannedAt string    `gorm:"index;size:10;not null" json:"planned_at"`
-	CreatedAt time.Time `gorm:"not null" json:"created_at"`
+	CreatedAt time.Time `gorm:"index;not null" json:"created_at"`
 	Completed bool      `gorm:"index;default:false" json:"completed"`
 }
 

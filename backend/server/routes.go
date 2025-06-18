@@ -17,6 +17,8 @@ func Register(app *fiber.App) {
 
 	tasks := api.Group("/tasks", middleware.RequiresAuth)
 	tasks.Post("/", handlers.CreateTask)
+	tasks.Get("/", handlers.SearchTasks)
+	tasks.Get("/count", handlers.CountTasks)
 	tasks.Get("/:id", handlers.GetTask)
 	tasks.Patch("/:id", handlers.UpdateTask)
 	tasks.Delete("/:id", handlers.DeleteTask)
