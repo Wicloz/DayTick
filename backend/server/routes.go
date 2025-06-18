@@ -8,12 +8,6 @@ import (
 )
 
 func Register(app *fiber.App) {
-	app.Static("/", "public/")
-
-	app.Get("*", func(c *fiber.Ctx) error {
-		return c.SendFile("public/index.html")
-	})
-
 	api := app.Group("/api")
 	api.Post("/register", handlers.Register)
 	api.Post("/login", handlers.Login)
@@ -26,4 +20,10 @@ func Register(app *fiber.App) {
 	tasks.Get("/:id", handlers.GetTask)
 	tasks.Patch("/:id", handlers.UpdateTask)
 	tasks.Delete("/:id", handlers.DeleteTask)
+
+	app.Static("/", "public/")
+
+	app.Get("*", func(c *fiber.Ctx) error {
+		return c.SendFile("public/index.html")
+	})
 }
