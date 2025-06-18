@@ -18,7 +18,7 @@ func isValidDate(date string) bool {
 }
 
 func GetTask(c *fiber.Ctx) error {
-	taskID, err := strconv.ParseUint(c.Params("id"), 10, 64)
+	taskID, err := strconv.ParseUint(c.Params("id"), 10, 0)
 	if err != nil || taskID < 1 {
 		return utils.APIerror(c, fiber.StatusBadRequest, "invalid task ID")
 	}
@@ -62,7 +62,7 @@ func CreateTask(c *fiber.Ctx) error {
 }
 
 func DeleteTask(c *fiber.Ctx) error {
-	taskID, err := strconv.ParseUint(c.Params("id"), 10, 64)
+	taskID, err := strconv.ParseUint(c.Params("id"), 10, 0)
 	if err != nil || taskID < 1 {
 		return utils.APIerror(c, fiber.StatusBadRequest, "invalid task ID")
 	}
@@ -84,7 +84,7 @@ func DeleteTask(c *fiber.Ctx) error {
 }
 
 func UpdateTask(c *fiber.Ctx) error {
-	taskID, err := strconv.ParseUint(c.Params("id"), 10, 64)
+	taskID, err := strconv.ParseUint(c.Params("id"), 10, 0)
 	if err != nil || taskID < 1 {
 		return utils.APIerror(c, fiber.StatusBadRequest, "invalid task ID")
 	}
