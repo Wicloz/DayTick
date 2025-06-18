@@ -6,7 +6,6 @@ import (
 
 	"regexp"
 	"strconv"
-	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
@@ -50,12 +49,9 @@ func CreateTask(c *fiber.Ctx) error {
 	}
 
 	task := database.Task{
+		UserID:    c.Locals("userID").(uint),
 		Title:     body.Title,
 		PlannedAt: body.PlannedAt,
-
-		UserID:    c.Locals("userID").(uint),
-		CreatedAt: time.Now(),
-		Completed: false,
 	}
 
 	if err := database.DB.Create(&task).Error; err != nil {
