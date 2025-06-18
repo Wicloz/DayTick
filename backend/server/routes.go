@@ -8,7 +8,11 @@ import (
 )
 
 func Register(app *fiber.App) {
-	app.Static("/", "./public/")
+	app.Static("/", "public/")
+
+	app.Get("*", func(c *fiber.Ctx) error {
+		return c.SendFile("public/index.html")
+	})
 
 	api := app.Group("/api")
 	api.Post("/register", handlers.Register)
