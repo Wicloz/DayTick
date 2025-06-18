@@ -49,13 +49,13 @@ export default function Search() {
     const updateTaskCount = () => {
         const query = new URLSearchParams()
         if (params.has("completed")) {
-            query.set("completed", params.get("completed"))
+            query.set("completed", params.get("completed") || "")
         }
         if (params.has("after")) {
-            query.set("after", params.get("after"))
+            query.set("after", params.get("after") || "")
         }
         if (params.has("before")) {
-            query.set("before", params.get("before"))
+            query.set("before", params.get("before") || "")
         }
 
         fetch(`/api/tasks/count?${query.toString()}`, {
