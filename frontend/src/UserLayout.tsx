@@ -42,7 +42,7 @@ export default function UserLayout() {
                 </a>
                 <ul>
                     <li><a className={`btn-floating red ${loggingOut ? "pulse" : ""}`} onClick={logout}><i className="material-icons">logout</i></a></li>
-                    <li><Link to="/" className="btn-floating blue"><i className="material-icons">settings</i></Link></li>
+                    <li><Link to="/settings" className="btn-floating blue"><i className="material-icons">settings</i></Link></li>
                     <li><Link to="/" className="btn-floating blue"><i className="material-icons">calendar_month</i></Link></li>
                     <li><Link to="/tasks/new" className="btn-floating green"><i className="material-icons">add</i></Link></li>
                     <li><Link to="/tasks" className="btn-floating blue"><i className="material-icons">list</i></Link></li>

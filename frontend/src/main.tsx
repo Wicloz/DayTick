@@ -8,6 +8,7 @@ import UserLayout from './UserLayout'
 import Calendar from './pages/Calendar'
 import Task from './pages/Task'
 import Search from './pages/Search'
+import Settings from './pages/Settings'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -20,6 +21,7 @@ createRoot(document.getElementById('root')!).render(
           <Route index element={<Calendar />} />
           <Route path='/tasks/:id' element={<Task />} />
           <Route path='/tasks' element={<Search />} />
+          <Route path='/settings' element={<Settings />} />
         </Route>
       </Routes>
     </BrowserRouter>

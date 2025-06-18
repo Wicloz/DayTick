@@ -21,6 +21,11 @@ func Register(app *fiber.App) {
 	tasks.Patch("/:id", handlers.UpdateTask)
 	tasks.Delete("/:id", handlers.DeleteTask)
 
+	user := api.Group("/me", middleware.RequiresAuth)
+	user.Get("/", handlers.GetSettings)
+	user.Patch("/", handlers.UpdateSettings)
+	user.Post("/password", handlers.ChangePassword)
+
 	app.Static("/", "public/")
 
 	app.Get("*", func(c *fiber.Ctx) error {
