@@ -95,8 +95,7 @@ export default function Search() {
                 setTasks(data)
             })
             .catch((err) => setError(err.message))
-
-        setLoading(false)
+            .finally(() => setLoading(false))
     }
 
     useEffect(updateTaskCount, [params.get("completed"), params.get("after"), params.get("before")])
