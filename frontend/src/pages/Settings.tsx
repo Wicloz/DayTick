@@ -5,8 +5,8 @@ export default function Settings() {
     const [oldPassword, setOldPassword] = useState("")
     const [newPassword, setNewPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
-    const [weekStart, setWeekStart] = useState("")
-    const [dayStart, setDayStart] = useState("")
+    const [weekStart, setWeekStart] = useState(1)
+    const [dayStart, setDayStart] = useState("00:00")
 
     const submitPasswordChangeForm = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -155,14 +155,14 @@ export default function Settings() {
                             </div>
 
                             <div className="input-field col s12 m6">
-                                <select id="weekStart" value={weekStart} onChange={(e) => setWeekStart(e.target.value)}>
-                                    <option value="monday">Monday</option>
-                                    <option value="tuesday">Tuesday</option>
-                                    <option value="wednesday">Wednesday</option>
-                                    <option value="thursday">Thursday</option>
-                                    <option value="friday">Friday</option>
-                                    <option value="saturday">Saturday</option>
-                                    <option value="sunday">Sunday</option>
+                                <select id="weekStart" value={weekStart} onChange={(e) => setWeekStart(Number(e.target.value))}>
+                                    <option value={1}>Monday</option>
+                                    <option value={2}>Tuesday</option>
+                                    <option value={3}>Wednesday</option>
+                                    <option value={4}>Thursday</option>
+                                    <option value={5}>Friday</option>
+                                    <option value={6}>Saturday</option>
+                                    <option value={7}>Sunday</option>
                                 </select>
                                 <label>Week Start</label>
                             </div>

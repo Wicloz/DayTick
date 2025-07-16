@@ -11,7 +11,7 @@ type User struct {
 	Email        string `gorm:"uniqueIndex;not null" json:"email"`
 	PasswordHash []byte `gorm:"not null" json:"-"`
 
-	StartOfWeek  string `gorm:"default:'monday'" json:"start_of_week"`
+	StartOfWeek  uint   `gorm:"default:1" json:"start_of_week"`
 	RolloverTime string `gorm:"default:'00:00'" json:"rollover_time"`
 }
 

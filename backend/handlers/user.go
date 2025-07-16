@@ -16,8 +16,8 @@ func isValidTime(time string) bool {
 	return timeFormat.MatchString(time)
 }
 
-func isValidWeekday(weekday string) bool {
-	return weekday == "monday" || weekday == "tuesday" || weekday == "wednesday" || weekday == "thursday" || weekday == "friday" || weekday == "saturday" || weekday == "sunday"
+func isValidWeekday(weekday uint) bool {
+	return weekday >= 1 && weekday <= 7
 }
 
 func ChangePassword(c *fiber.Ctx) error {
@@ -64,7 +64,7 @@ func GetSettings(c *fiber.Ctx) error {
 
 func UpdateSettings(c *fiber.Ctx) error {
 	var body struct {
-		StartOfWeek  *string `json:"start_of_week"`
+		StartOfWeek  *uint   `json:"start_of_week"`
 		RolloverTime *string `json:"rollover_time"`
 	}
 	if err := c.BodyParser(&body); err != nil {
