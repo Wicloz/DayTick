@@ -177,7 +177,7 @@ export default function Calendar() {
             {error}
 
             <h4>Expired Tasks</h4>
-            <div className="calendar-day-block">
+            <div className="calendar-day-block calendar-border-fix">
                 <ul>
                     {expiredTasks.map((task) => (
                         <DraggableTask data={task} handleDelete={deleteTask} />
@@ -208,7 +208,7 @@ export default function Calendar() {
                 <label htmlFor="selected">Choose Date</label>
             </div>
 
-            <div id="calendar">
+            <div id="calendar" className="calendar-border-fix">
                 {calendar.map((date) => (
                     <div className={`calendar-day-block ${date === today ? "calendar-today" : ""} ${date < monthStart || date > monthEnd ? "calendar-wrong-month" : ""}`} onDrop={(e) => {
                         e.preventDefault()

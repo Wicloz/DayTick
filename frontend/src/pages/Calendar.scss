@@ -1,15 +1,20 @@
 @import "materialize-css/sass/components/color-variables";
 @import "materialize-css/sass/components/color-classes";
 @import "materialize-css/sass/components/variables";
-@import "materialize-css/sass/materialize";
 
 #calendar {
     display: flex;
     flex-wrap: wrap;
 }
 
+.calendar-border-fix {
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
 .calendar-day-block {
-    border: 1px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
     width: calc(100% / 7);
 
     span {
