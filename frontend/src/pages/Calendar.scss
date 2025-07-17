@@ -1,0 +1,67 @@
+@import "materialize-css/sass/components/color-variables";
+@import "materialize-css/sass/components/color-classes";
+@import "materialize-css/sass/components/variables";
+@import "materialize-css/sass/materialize";
+
+#calendar {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.calendar-day-block {
+    border: 1px solid black;
+    width: calc(100% / 7);
+
+    span {
+        text-align: center;
+        width: 100%;
+        display: block;
+        color: gray;
+    }
+
+    ul {
+        margin: 0;
+    }
+}
+
+.calendar-today {
+    background-color: $primary-color;
+
+    span {
+        color: black;
+    }
+}
+
+.calendar-wrong-month {
+    background-color: lightgrey;
+
+    span {
+        color: black;
+    }
+}
+
+.task {
+    display: flex;
+    background-color: $secondary-color;
+    border-radius: 8px;
+
+    a {
+        color: black;
+        flex: 1 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        transition: color 0.2s;
+        color: black;
+
+        &:hover {
+            color: red;
+        }
+    }
+}
