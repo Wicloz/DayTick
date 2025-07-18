@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import type { Task } from "../types"
 import { Link } from "react-router"
 import { DateTime, Duration } from "luxon"
+import type { WeekdayNumbers } from "luxon"
 import "./Calendar.scss"
 
 function DraggableTask({ data, handleDelete, handleToggle }: { data: Task, handleDelete?: (id: number) => void, handleToggle?: (id: number, completed: boolean) => void }) {
@@ -44,6 +45,7 @@ export default function Calendar() {
     const [calendarBefore, setCalendarBefore] = useState("")
     const [monthStart, setMonthStart] = useState("")
     const [monthEnd, setMonthEnd] = useState("")
+    const [weekdays, setWeekdays] = useState<string[]>([])
 
     function deleteTask(id: number) {
         fetch(`/api/tasks/${id}`, {
@@ -127,6 +129,14 @@ export default function Calendar() {
     }, [selected, weekStart])
 
     useEffect(() => {
+        const newWeekdays = []
+        for (let i = 0; i < 7; i++) {
+            newWeekdays.push(DateTime.fromObject({ weekday: (i + weekStart - 1) % 7 + 1 as WeekdayNumbers }).toLocaleString({ weekday: "long" }))
+        }
+        setWeekdays(newWeekdays)
+    }, [weekStart])
+
+    useEffect(() => {
         fetch(`/api/me`, {
             method: "GET",
             credentials: "include",
@@ -208,7 +218,13 @@ export default function Calendar() {
                 <label htmlFor="selected">Choose Date</label>
             </div>
 
-            <div id="calendar" className="calendar-border-fix">
+            <div id="calendar-header">
+                {weekdays.map((day) => (
+                    <span className="calendar-weekday">{day}</span>
+                ))}
+            </div>
+
+            <div id="calendar-body" className="calendar-border-fix">
                 {calendar.map((date) => (
                     <div className={`calendar-day-block ${date === today ? "calendar-today" : ""} ${date < monthStart || date > monthEnd ? "calendar-wrong-month" : ""}`} onDrop={(e) => {
                         e.preventDefault()
