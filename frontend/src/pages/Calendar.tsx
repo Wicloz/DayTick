@@ -40,7 +40,7 @@ export default function Calendar() {
 
     const [today, setToday] = useState("")
     const [selected, setSelected] = useState("")
-    const [calendar, setCalendar] = useState<String[]>([])
+    const [calendar, setCalendar] = useState<string[]>([])
     const [calendarAfter, setCalendarAfter] = useState("")
     const [calendarBefore, setCalendarBefore] = useState("")
     const [monthStart, setMonthStart] = useState("")
@@ -119,7 +119,7 @@ export default function Calendar() {
         endOfMonth = endOfMonth.plus({ days: (7 - ((7 + endOfMonth.weekday - weekStart) % 7) - 1) % 7 })
         setCalendarBefore(endOfMonth.plus({ days: 1 }).toISODate() || "")
 
-        const buildCalendar: String[] = []
+        const buildCalendar: string[] = []
         for (let date = startOfMonth; date <= endOfMonth; date = date.plus({ days: 1 })) {
             buildCalendar.push(date.toISODate() || "")
         }
@@ -245,9 +245,9 @@ export default function Calendar() {
                         const expiredTask = expiredTasks.find(task => task.id === id)
 
                         if (calendarTask) {
-                            setMonthsTasks(monthsTasks.map(task => task.id === id ? { ...task, planned_at: date as string } : task))
+                            setMonthsTasks(monthsTasks.map(task => task.id === id ? { ...task, planned_at: date } : task))
                         } else if (expiredTask) {
-                            setMonthsTasks([...monthsTasks, { ...expiredTask, planned_at: date as string }])
+                            setMonthsTasks([...monthsTasks, { ...expiredTask, planned_at: date }])
                         }
 
                         if ((calendarTask && calendarTask.completed) || (expiredTask && expiredTask.completed)) {
@@ -256,9 +256,9 @@ export default function Calendar() {
 
                         if (date < today) {
                             if (expiredTask) {
-                                setExpiredTasks(expiredTasks.map(task => task.id === id ? { ...task, planned_at: date as string } : task))
+                                setExpiredTasks(expiredTasks.map(task => task.id === id ? { ...task, planned_at: date } : task))
                             } else if (calendarTask) {
-                                setExpiredTasks([...expiredTasks, { ...calendarTask, planned_at: date as string }])
+                                setExpiredTasks([...expiredTasks, { ...calendarTask, planned_at: date }])
                             }
                         }
 
