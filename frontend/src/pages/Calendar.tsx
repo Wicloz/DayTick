@@ -1,12 +1,62 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import type { Task } from "../types"
 import { Link } from "react-router"
 import { DateTime, Duration } from "luxon"
 import type { WeekdayNumbers } from "luxon"
 import "./Calendar.scss"
+import confetti from "canvas-confetti"
 
 function DraggableTask({ data, handleDelete, handleToggle }: { data: Task, handleDelete?: (id: number) => void, handleToggle?: (id: number, completed: boolean) => void }) {
     const [popup, setPopup] = useState(false)
+    const strikeRef = useRef<HTMLSpanElement>(null)
+    const colors = [
+        '#f44336',
+        '#e91e63',
+        '#9c27b0',
+        '#673ab7',
+        '#3f51b5',
+        '#2196f3',
+        '#03a9f4',
+        '#00bcd4',
+        '#009688',
+        '#4caf50',
+        '#8bc34a',
+        '#cddc39',
+        '#ffeb3b',
+        '#ffc107',
+        '#ff9800',
+        '#ff5722',
+        '#795548',
+    ]
+
+    useEffect(() => {
+        const strike = strikeRef.current
+        if (!strike) return
+
+        const onTransitionEnd = () => {
+            const rect = strike.getBoundingClientRect()
+            const origin = {
+                x: rect.right / window.innerWidth,
+                y: (rect.top + rect.height / 2) / window.innerHeight,
+            }
+
+            for (let i = 0; i < 360; i++) {
+                confetti({
+                    particleCount: 1,
+                    spread: 360,
+                    origin: origin,
+                    startVelocity: Math.sqrt(Math.random()) * 40,
+                    colors: [colors[Math.floor(Math.random() * colors.length)]],
+                })
+            }
+        }
+
+        if (data.completed) {
+            strike.addEventListener("transitionend", onTransitionEnd)
+        }
+
+        return () => strike.removeEventListener("transitionend", onTransitionEnd)
+    }, [data.completed, strikeRef])
 
     return (
         <li className="task-wrapper">
@@ -16,7 +66,7 @@ function DraggableTask({ data, handleDelete, handleToggle }: { data: Task, handl
                 setPopup(!popup)
             }}>
                 <span className="task-title">
-                    <span className={`task-strike ${data.completed ? "active" : ""}`}></span>
+                    <span ref={strikeRef} className={`task-strike ${data.completed ? "active" : ""}`}></span>
                     {data.title}
                 </span>
                 <span className="task-mark">{data.completed ? "✔️" : "❌"}</span>
