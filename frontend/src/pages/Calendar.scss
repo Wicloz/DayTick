@@ -27,14 +27,14 @@
     border-left: 1px solid black;
     width: calc(100% / 7);
 
-    span {
+    >span {
         text-align: center;
         width: 100%;
         display: block;
         color: gray;
     }
 
-    ul {
+    >ul {
         margin: 0;
     }
 }
@@ -42,7 +42,7 @@
 .calendar-today {
     background-color: $primary-color;
 
-    span {
+    >span {
         color: black;
     }
 }
@@ -50,33 +50,56 @@
 .calendar-wrong-month {
     background-color: lightgrey;
 
-    span {
+    >span {
         color: black;
     }
 }
 
-.task {
-    display: flex;
-    background-color: $secondary-color;
-    border-radius: 8px;
+.task-wrapper {
+    position: relative;
 
-    a {
-        color: black;
-        flex: 1 1;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    .task-item {
+        background-color: $secondary-color;
+        border-radius: 8px;
+        border: 1px solid black;
+        display: flex;
+        padding-left: 4px;
+        padding-right: 4px;
+        cursor: pointer;
+
+        .task-title {
+            position: relative;
+            color: black;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1 1;
+        }
+
+        .task-strike {
+            position: absolute;
+            top: 55%;
+            height: 2px;
+            background-color: black;
+            transition: width 0.5s ease;
+            width: 0;
+
+            &.active {
+                width: 100%;
+            }
+        }
+
+        .task-mark {
+            flex: 0 0;
+        }
     }
 
-    button {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        transition: color 0.2s;
-        color: black;
-
-        &:hover {
-            color: red;
-        }
+    .task-popup {
+        position: absolute;
+        top: 100%;
+        background-color: $secondary-color;
+        border-radius: 8px;
+        border: 1px solid black;
+        width: max-content;
     }
 }

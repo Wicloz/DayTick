@@ -6,26 +6,38 @@ import type { WeekdayNumbers } from "luxon"
 import "./Calendar.scss"
 
 function DraggableTask({ data, handleDelete, handleToggle }: { data: Task, handleDelete?: (id: number) => void, handleToggle?: (id: number, completed: boolean) => void }) {
+    const [popup, setPopup] = useState(false)
+
     return (
-        <li className="task" draggable="true" onDragStart={(e) => {
-            e.dataTransfer.setData("text/plain", data.id.toString())
-        }}>
-            <label>
-                <input
-                    type="checkbox"
-                    className="filled-in"
-                    checked={data.completed}
-                    disabled={handleToggle === undefined}
-                    onChange={(e) => handleToggle && handleToggle(data.id, e.target.checked)}
-                />
-                <span></span>
-            </label>
-            <Link to={`/tasks/${data.id}`} title={data.title}>{data.title}</Link>
-            {handleDelete &&
-                <button onClick={() => handleDelete(data.id)}>
-                    <i className="material-icons">delete</i>
-                </button>
-            }
+        <li className="task-wrapper">
+            <div className="task-item" draggable="true" onDragStart={(e) => {
+                e.dataTransfer.setData("text/plain", data.id.toString())
+            }} onClick={() => {
+                setPopup(!popup)
+            }}>
+                <span className="task-title">
+                    <span className={`task-strike ${data.completed ? "active" : ""}`}></span>
+                    {data.title}
+                </span>
+                <span className="task-mark">{data.completed ? "✔️" : "❌"}</span>
+            </div>
+            {popup && (
+                <div className="task-popup">
+                    {handleToggle && (
+                        <button className="btn" onClick={() => handleToggle(data.id, !data.completed)}>
+                            <i className="material-icons">{data.completed ? "check_box" : "check_box_outline_blank"}</i>
+                        </button>
+                    )}
+                    <Link className="btn" to={`/tasks/${data.id}`} title={data.title}>
+                        <i className="material-icons">edit</i>
+                    </Link>
+                    {handleDelete && (
+                        <button className="btn" onClick={() => handleDelete(data.id)}>
+                            <i className="material-icons">delete</i>
+                        </button>
+                    )}
+                </div>
+            )}
         </li>
     )
 }
