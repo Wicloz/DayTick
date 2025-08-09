@@ -65,7 +65,7 @@ function DraggableTask({ data, handleDelete, handleToggle }: { data: Task, handl
             }} onClick={() => {
                 setPopup(!popup)
             }}>
-                <span className="task-title">
+                <span className="task-title" title={data.title}>
                     <span ref={strikeRef} className={`task-strike ${data.completed ? "active" : ""}`}></span>
                     {data.title}
                 </span>
@@ -78,7 +78,7 @@ function DraggableTask({ data, handleDelete, handleToggle }: { data: Task, handl
                             <i className="material-icons">{data.completed ? "check_box" : "check_box_outline_blank"}</i>
                         </button>
                     )}
-                    <Link className="btn" to={`/tasks/${data.id}`} title={data.title}>
+                    <Link className="btn" to={`/tasks/${data.id}`}>
                         <i className="material-icons">edit</i>
                     </Link>
                     {handleDelete && (
