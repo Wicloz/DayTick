@@ -9,6 +9,7 @@ import confetti from "canvas-confetti"
 function DraggableTask({ data, handleDelete, handleToggle }: { data: Task, handleDelete?: (id: number) => void, handleToggle?: (id: number, completed: boolean) => void }) {
     const [popup, setPopup] = useState(false)
     const strikeRef = useRef<HTMLSpanElement>(null)
+    const markRef = useRef<HTMLSpanElement>(null)
     const colors = [
         '#f44336',
         '#e91e63',
@@ -31,12 +32,13 @@ function DraggableTask({ data, handleDelete, handleToggle }: { data: Task, handl
 
     useEffect(() => {
         const strike = strikeRef.current
-        if (!strike) return
+        const mark = markRef.current
+        if (!strike || !mark) return
 
         const onTransitionEnd = () => {
-            const rect = strike.getBoundingClientRect()
+            const rect = mark.getBoundingClientRect()
             const origin = {
-                x: rect.right / window.innerWidth,
+                x: (rect.left + rect.width / 2) / window.innerWidth,
                 y: (rect.top + rect.height / 2) / window.innerHeight,
             }
 
@@ -56,7 +58,7 @@ function DraggableTask({ data, handleDelete, handleToggle }: { data: Task, handl
         }
 
         return () => strike.removeEventListener("transitionend", onTransitionEnd)
-    }, [data.completed, strikeRef])
+    }, [data.completed, strikeRef, markRef])
 
     return (
         <li className="task-wrapper">
@@ -69,7 +71,7 @@ function DraggableTask({ data, handleDelete, handleToggle }: { data: Task, handl
                     <span ref={strikeRef} className={`task-strike ${data.completed ? "active" : ""}`}></span>
                     {data.title}
                 </span>
-                <span className="task-mark">{data.completed ? "✔️" : "❌"}</span>
+                <span ref={markRef} className="task-mark">{data.completed ? "✔️" : "❌"}</span>
             </div>
             {popup && (
                 <div className="task-popup">
