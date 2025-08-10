@@ -254,7 +254,7 @@ export default function Calendar() {
             <div className="calendar-day-block calendar-border-fix">
                 <ul>
                     {expiredTasks.map((task) => (
-                        <DraggableTask data={task} handleDelete={deleteTask} />
+                        <DraggableTask key={task.id} data={task} handleDelete={deleteTask} />
                     ))}
                 </ul>
             </div>
@@ -284,13 +284,13 @@ export default function Calendar() {
 
             <div id="calendar-header">
                 {weekdays.map((day) => (
-                    <span className="calendar-weekday">{day}</span>
+                    <span key={day} className="calendar-weekday">{day}</span>
                 ))}
             </div>
 
             <div id="calendar-body" className="calendar-border-fix">
                 {calendar.map((date) => (
-                    <div className={`calendar-day-block ${date === today ? "calendar-today" : ""} ${date < monthStart || date > monthEnd ? "calendar-wrong-month" : ""}`} onDrop={(e) => {
+                    <div key={date} className={`calendar-day-block ${date === today ? "calendar-today" : ""} ${date < monthStart || date > monthEnd ? "calendar-wrong-month" : ""}`} onDrop={(e) => {
                         e.preventDefault()
                         const id = parseInt(e.dataTransfer.getData("text/plain"))
 
@@ -334,8 +334,8 @@ export default function Calendar() {
                         <ul>
                             {monthsTasks.filter(task => task.planned_at === date).map((task) =>
                                 date === today
-                                    ? <DraggableTask data={task} handleDelete={deleteTask} handleToggle={markTask} />
-                                    : <DraggableTask data={task} handleDelete={deleteTask} />
+                                    ? <DraggableTask key={task.id} data={task} handleDelete={deleteTask} handleToggle={markTask} />
+                                    : <DraggableTask key={task.id} data={task} handleDelete={deleteTask} />
                             )}
                         </ul>
                     </div>
